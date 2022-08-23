@@ -14,7 +14,8 @@ class MensajesController extends Controller
      */
     public function index()
     {
-        //
+        $mensajes = Mensaje::all();
+        return view('mensajes.lista', compact('mensajes'));
     }
 
     /**
@@ -35,7 +36,12 @@ class MensajesController extends Controller
      */
     public function store(Request $request)
     {
-        $request->file('firma')->store('public');
+        // $request->file('imagen')->store('public');
+        $mensaje = new Mensaje($request->all());
+        $mensaje->imagen = $request->file('imagen')->store('public');;
+        $mensaje->save();
+       
+        return 'Mensaje creado';
     }
 
     /**
@@ -46,8 +52,7 @@ class MensajesController extends Controller
      */
     public function show($id)
     {
-        $mensajes = Mensaje::all();
-        return view('mensajes.lista', compact('mensajes'));
+
     }
 
     /**

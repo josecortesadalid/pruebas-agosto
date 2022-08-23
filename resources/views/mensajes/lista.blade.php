@@ -8,8 +8,10 @@
 
     <ul class="m-0 p-0">
         @forelse($mensajes as $mensaje)
+        uno
                 @if($mensaje->imagen)
-                <img src="/storage/{{ $mensaje->imagen }}" alt="{{ $mensaje->nombre }}" style="height:200px; object-fit: cover">
+                {{ $mensaje->imagen }}
+                <img src="/storage/{{ $mensaje->imagen }}" alt="el alt">
                 @endif
             <br>
             @empty
@@ -18,7 +20,9 @@
     </ul>
 <br><br><br>
 
+<img src="\storage\app\public\S57hB0cRVpm3y9MhS7M7XeYyvl7HmUtiCQ9VjqxV.gif" alt="el alt" style="height:200px; object-fit: cover">
 
+<!-- storage\app\public\S57hB0cRVpm3y9MhS7M7XeYyvl7HmUtiCQ9VjqxV.gif -->
 </div>
 
 </body>
