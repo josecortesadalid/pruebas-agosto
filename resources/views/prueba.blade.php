@@ -21,5 +21,6 @@
         {!! Purify::clean($html) !!}
         <!-- si inspeccionas el link, verás que no hace el onclick -->
 
+
 </body>
 </html>
