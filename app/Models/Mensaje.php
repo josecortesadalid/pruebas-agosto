@@ -9,5 +9,6 @@ class Mensaje extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['imagen'];
+    protected $guarded = ['id'];
+    //todos los campos se pueden asignar masivamente excepto el id
 }

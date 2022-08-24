@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mensaje;
+use App\Models\User;
+use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
 
 class MensajesController extends Controller
@@ -25,7 +27,8 @@ class MensajesController extends Controller
      */
     public function create()
     {
-        return view('mensajes.create');
+        $users = User::where('id', '!=', auth()->id())->get();
+        return view('mensajes.create', compact('users'));
     }
 
     /**
@@ -36,10 +39,17 @@ class MensajesController extends Controller
      */
     public function store(Request $request)
     {
+
+        Mensaje::create([
+            'sender_id' => auth()->id(),
+            'recipient_id' => $request->recipient_id,
+            'imagen' => $request->imagen
+        ]);
+
         // $request->file('imagen')->store('public');
-        $mensaje = new Mensaje($request->all());
-        $mensaje->imagen = $request->file('imagen')->store('public');;
-        $mensaje->save();
+        // $mensaje = new Mensaje($request->all());
+        // $mensaje->imagen = $request->file('imagen')->store('public');;
+        // $mensaje->save();
        
         return 'Mensaje creado';
     }

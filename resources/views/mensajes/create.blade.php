@@ -10,8 +10,8 @@
         method="POST" 
         action="{{ route('mensajes.store') }}" 
         class="bg-white shadow rounded p-2 p-md-4"
-        enctype="multipart/form-data">   
-        @include('_form', ['btnText' => 'Guardar'])
+        enctype="multipart/form-data">  
+        @include('_form', ['btnText' => 'Guardar', $users])
         </form>
     </div>
     </div>
