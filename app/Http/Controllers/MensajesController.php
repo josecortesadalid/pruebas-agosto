@@ -74,7 +74,8 @@ class MensajesController extends Controller
      */
     public function show($id)
     {
-
+        $message = Mensaje::findOrFail($id);
+        return view ('mensajes.show', compact('message'));
     }
 
     /**

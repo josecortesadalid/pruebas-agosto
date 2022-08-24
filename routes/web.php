@@ -28,6 +28,8 @@ Route::resource('/mensajes', MensajesController::class);
 
 Route::get('/notificaciones', [NotificationsController::class, 'index'])->name('notifications.index');
 
+Route::patch('notificaciones/{id}', [NotificationsController::class, 'read'])->name('notifications.read');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
