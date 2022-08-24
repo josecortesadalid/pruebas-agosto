@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MensajesController;
+use App\Http\Controllers\NotificationsController;
 use App\Mail\TuMensajeFueRecibido;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +25,12 @@ Route::get('/email', function () {
 });
 
 Route::resource('/mensajes', MensajesController::class);
+
+Route::get('/notificaciones', [NotificationsController::class, 'index'])->name('notifications.index');
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';

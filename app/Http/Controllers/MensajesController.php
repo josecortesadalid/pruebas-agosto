@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Mensaje;
 use App\Models\User;
+use App\Notifications\MessageSent;
 use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notifiable;
 
 class MensajesController extends Controller
 {
+    use Notifiable;
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +43,12 @@ class MensajesController extends Controller
     public function store(Request $request)
     {
 
-        Mensaje::create([
+        $this->validate($request, [
+            'imagen' => 'required',
+            'recipient_id' => 'required|exists:users,id' // el recipient_id es obligatorio y nos aseguramos de que existe en la tabla users, campo id
+        ]);
+
+        $message = Mensaje::create([
             'sender_id' => auth()->id(),
             'recipient_id' => $request->recipient_id,
             'imagen' => $request->imagen
@@ -50,6 +58,10 @@ class MensajesController extends Controller
         // $mensaje = new Mensaje($request->all());
         // $mensaje->imagen = $request->file('imagen')->store('public');;
         // $mensaje->save();
+
+        $recipient = User::find($request->recipient_id);
+
+        $recipient->notify(new MessageSent($message));
        
         return 'Mensaje creado';
     }
