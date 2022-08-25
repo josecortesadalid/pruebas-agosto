@@ -23,6 +23,11 @@ class NotificationsController extends Controller
     public function read($id)
     {
         DatabaseNotification::find($id)->markAsRead();
-        return back();
+        return back()->with('flash', 'Notificación marcada como leída');
+    }
+    public function destroy($id)
+    {
+        DatabaseNotification::find($id)->delete();
+        return back()->with('flash', 'Notificación marcada como leída');
     }
 }

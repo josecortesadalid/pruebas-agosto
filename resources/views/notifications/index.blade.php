@@ -9,10 +9,12 @@
                 @foreach ($unreadNotifications as $unreadNotification)
                     <div class="list-group-item">
                         {{ $unreadNotification->data['recipient_id'] }}
-                        <form method="POST" action="{{ route('notifications.read', $unreadNotification->data['recipient_id']) }}">
+                        <form method="POST" 
+                            action="{{ route('notifications.read', $unreadNotification->id) }}">
                             {{ method_field('PATCH') }}
                             {{ csrf_field() }}
-                            <p> <div class="btn btn-danger">X</div> </p>
+                            <p> <button class="btn btn-danger">X</button> </p>
+                            <!-- Recuerda ponerlo como button y no como div para que funcione -->
                         </form>
 
                     </div>
@@ -25,6 +27,13 @@
                 @foreach ($readNotifications as $readNotification)
                     <div class="list-group-item">
                         {{ $readNotification->data['recipient_id'] }}
+                        <form method="POST" 
+                            action="{{ route('notifications.destroy', $readNotification->id) }}">
+                            {{ method_field('PATCH') }}
+                            {{ csrf_field() }}
+                            <p> <button class="btn btn-danger">X</button> </p>
+                            <!-- Recuerda ponerlo como button y no como div para que funcione -->
+                        </form>
                     </div>
                 @endforeach
             </div>
