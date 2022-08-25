@@ -7,6 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    Esto sería el mensaje a mostrar. Esta es la URL de la imagen de la firma: {{ $message->imagen }}
+    Este es el usuario: {{ $user->name }}
+    <p>
+        <a href=" {{ route('mensajes.show', $msg->id) }} ">
+            Click para ver el mensaje
+        </a>
+    </p>
 </body>
 </html>

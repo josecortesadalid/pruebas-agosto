@@ -11,4 +11,9 @@ class Mensaje extends Model
 
     protected $guarded = ['id'];
     //todos los campos se pueden asignar masivamente excepto el id
+
+    public function sender()
+    {
+        return $this->belongsTo(User::class, 'sender_id');
+    }
 }
