@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MensajesController;
 use App\Http\Controllers\NotificationsController;
+use App\Http\Controllers\PostsController;
 use App\Mail\TuMensajeFueRecibido;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,8 @@ Route::get('/notificaciones', [NotificationsController::class, 'index'])->name('
 
 Route::patch('notificaciones/{id}', [NotificationsController::class, 'read'])->name('notifications.read');
 Route::patch('notificaciones/{id}', [NotificationsController::class, 'destroy'])->name('notifications.destroy');
+
+Route::resource('/posts', PostsController::class);
 
 
 Route::get('/dashboard', function () {

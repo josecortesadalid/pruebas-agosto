@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Providers\PostCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,8 +10,9 @@ class Post extends Model
 {
     use HasFactory;
 
-    public function getBodyAttribute($body)
-    {
-        return \Purify::clean($body); // Se limpiaría cada vez que se use {!! $post->body !!}
-    }
+    protected $guarded = [];
+
+    protected $dispatchesEvents = [ // emparejamos el evento de eloquent con un evento propio
+        'created' => PostCreated::class
+    ];
 }
