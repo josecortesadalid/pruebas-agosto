@@ -20,6 +20,12 @@ Route::get('/prueba', function () {
     return $pdf->stream();
 });
 
+Route::get('/descarga', function () {
+    $pdf = Pdf::loadView('welcome');
+
+    return $pdf->download();
+});
+
 Route::get('/email', function () {
 
     $message = 'Esto es un mensaje';
