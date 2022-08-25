@@ -6,6 +6,7 @@ use App\Http\Controllers\PostsController;
 use App\Mail\TuMensajeFueRecibido;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 
@@ -14,7 +15,9 @@ Route::get('/', function () {
 });
 
 Route::get('/prueba', function () {
-    return view('prueba');
+    $pdf = Pdf::loadView('welcome');
+
+    return $pdf->stream();
 });
 
 Route::get('/email', function () {
