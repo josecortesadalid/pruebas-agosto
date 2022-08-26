@@ -1,14 +1,15 @@
 <?php
 
+use App\Exports\UsersExport;
 use App\Http\Controllers\MensajesController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\PostsController;
 use App\Mail\TuMensajeFueRecibido;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Barryvdh\DomPDF\Facade\Pdf;
-
-
+use Maatwebsite\Excel\Facades\Excel;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,6 +25,20 @@ Route::get('/descarga', function () {
     $pdf = Pdf::loadView('welcome');
 
     return $pdf->download();
+});
+
+// Route::get('/descargaexcel', function () {
+//     return Excel::download(new UsersExport, 'users.xlsx');
+// });
+
+// Route::get('/excel', function () {
+//     Excel::store(new User(), 'users.xlsx', 'public'); 
+//     return 'Listo';
+// });
+
+Route::get('/excel', function ()
+{
+    return (new UsersExport(2022))->download('users.xlsx');
 });
 
 Route::get('/email', function () {
