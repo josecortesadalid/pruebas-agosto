@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Redis;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,9 +37,20 @@ Route::get('/descarga', function () {
 //     return 'Listo';
 // });
 
-Route::get('/excel', function ()
+// Route::get('/excel', function ()
+// {
+//     return (new UsersExport(2022))->download('users.xlsx');
+// });
+
+// Route::get('/de', function ()
+// {
+//     return (new UsersExport())->download('users.xlsx');
+// });
+
+Route::get('/de', function ()
 {
-    return (new UsersExport(2022))->download('users.xlsx');
+    (new UsersExport)->store('users.csv');
+    return 'Exportando...';
 });
 
 Route::get('/email', function () {
@@ -48,6 +60,7 @@ Route::get('/email', function () {
 
     return view('prueba');
 });
+
 
 Route::resource('/mensajes', MensajesController::class);
 
