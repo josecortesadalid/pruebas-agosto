@@ -18,7 +18,9 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete(); // que automáticamente y en cascada se eliminen los registros asociados
             $table->string('password');
+            $table->text('options');
             $table->rememberToken();
             $table->timestamps();
         });

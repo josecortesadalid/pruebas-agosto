@@ -47,6 +47,14 @@ Route::get('/descarga', function () {
 //     return (new UsersExport())->download('users.xlsx');
 // });
 
+Route::get('/casts', function ()
+{
+    $user = User::first();
+    $user->options = ['key' => 'value'];
+    $user->save();
+    return $user;
+});
+
 Route::get('/de', function ()
 {
     (new UsersExport)->store('users.csv');

@@ -15,4 +15,9 @@ class Post extends Model
     protected $dispatchesEvents = [ // emparejamos el evento de eloquent con un evento propio
         'created' => PostCreated::class
     ];
+
+    public function user()  // $project->category
+    {
+        return $this->belongsTo(User::class);
+    }
 }
